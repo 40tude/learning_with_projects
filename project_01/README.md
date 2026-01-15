@@ -1,5 +1,12 @@
 ## Description
 
+A CLI tool that watches a JSON configuration file for changes and validates its structure in real-time.
+
+In this version of the first project I follow blindly the instructions. I want to make sure the process and the setup work (workspaces, build, doc...). When answering my question, Claude generated all the code. In this phase I simply copy paste the code and make few adjustments to make it work.
+
+**Note:** I had to fix only one error at compile time. The compiler told me exactly how to modify the line.
+
+In a second version, knowing that the setup is in place and working I'll re-create the same project "by hand".
 
 
 ## Testing
@@ -32,10 +39,14 @@ cargo run -p config_watcher -- --file prj01_example_config.json --interval 2
 
 ---
 
+Before to go further, make sure to read the [README.md](../README.md) available in the root folder.
 
 **Question to Claude:**
 Ok. Let’s proceed with Project 1. Guide me in building it completely from scratch in Rust, following production-quality coding practices.
 Break the implementation into clear, incremental steps. For each step, explain the design decision, the Rust concepts involved, and provide idiomatic code. Use the specified crates throughout. After implementation, include unit tests and highlight common pitfalls.
+
+
+**Note:** Find below a verbatim copy of the answer and instructions from Claude. I did'nt follow all of them because I use workspaces, some names are different etc.
 
 # Project 1: Async Configuration File Watcher - Complete Implementation Guide
 
