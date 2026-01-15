@@ -1,0 +1,20 @@
+{
+    "app_name": "MyAwesomeApp",
+    "version": "1.0.0",
+    "environment": "development",
+    "server": {
+        "host": "localhost",
+        "port": 8080,
+        "enable_ssl": false
+    },
+    "database": {
+        "connection_string": "postgres://localhost/mydb",
+        "pool_size": 15,
+        "timeout_seconds": 45
+    },
+    "features": {
+        "enable_caching": true,
+        "enable_analytics": false,
+        "debug_mode": true
+    }
+}
