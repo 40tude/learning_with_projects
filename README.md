@@ -8,7 +8,7 @@
 
 ## 0. Description
 
-* Jan 2026
+* January 2026
 * These are a set of 5 projects I plan to work on in the first half of 2026 in order to improve my skills in Rust.
 * I use Claude Code to determine the crates to study and the projects to build.
 * I plan to share the prompts I use, show the discussions etc.
