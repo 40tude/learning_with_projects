@@ -48,9 +48,9 @@ Break the implementation into clear, incremental steps. For each step, explain t
 
 **Note:** Find below a verbatim copy of the answer and instructions from Claude. I did'nt follow all of them because I use workspaces, some names are different etc.
 
-# Project 1: Async Configuration File Watcher - Complete Implementation Guide
+## Project 1: Async Configuration File Watcher - Complete Implementation Guide
 
-## Project Overview
+### Project Overview
 
 We'll build `config-watcher`, a CLI tool that monitors a JSON configuration file for changes and validates its structure in real-time.
 
@@ -63,16 +63,16 @@ We'll build `config-watcher`, a CLI tool that monitors a JSON configuration file
 
 ---
 
-## Step 1: Project Setup and Dependencies
+### Step 1: Project Setup and Dependencies
 
-### Create the project
+#### Create the project
 
 ```powershell
 cargo new config-watcher
 cd config-watcher
 ```
 
-### Edit `Cargo.toml`
+#### Edit `Cargo.toml`
 
 ```toml
 [package]
@@ -100,7 +100,7 @@ tempfile = "3.14"
 
 ---
 
-## Step 2: Define Custom Error Types with `thiserror`
+### Step 2: Define Custom Error Types with `thiserror`
 
 Create `src/error.rs`:
 
@@ -166,7 +166,7 @@ pub type Result<T> = std::result::Result<T, ConfigError>;
 
 ---
 
-## Step 3: Define Configuration Schema with `serde`
+### Step 3: Define Configuration Schema with `serde`
 
 Create `src/config.rs`:
 
@@ -319,7 +319,7 @@ impl AppConfig {
 
 ---
 
-## Step 4: Implement File Watching Logic with `tokio`
+### Step 4: Implement File Watching Logic with `tokio`
 
 Create `src/watcher.rs`:
 
@@ -523,7 +523,7 @@ impl ConfigWatcher {
 
 ---
 
-## Step 5: CLI Interface with `clap`
+### Step 5: CLI Interface with `clap`
 
 Create `src/cli.rs`:
 
@@ -597,7 +597,7 @@ impl Cli {
 
 ---
 
-## Step 6: Main Application with Signal Handling
+### Step 6: Main Application with Signal Handling
 
 Update `src/main.rs`:
 
@@ -654,7 +654,7 @@ async fn main() -> anyhow::Result<()> {
 
 ---
 
-## Step 7: Example Configuration File
+### Step 7: Example Configuration File
 
 Create `example-config.json` in project root:
 
@@ -683,7 +683,7 @@ Create `example-config.json` in project root:
 
 ---
 
-## Step 8: Unit Tests
+### Step 8: Unit Tests
 
 Create `src/config.rs` tests (add at the bottom of `config.rs`):
 
@@ -917,7 +917,7 @@ cargo test
 
 ---
 
-## Step 9: Running the Application
+### Step 9: Running the Application
 
 ```powershell
 # Build the project
@@ -942,9 +942,9 @@ cargo run -- --help
 
 ---
 
-## Common Pitfalls & Solutions
+### Common Pitfalls & Solutions
 
-### 1. **Pitfall: Not handling errors at async boundaries**
+#### 1. **Pitfall: Not handling errors at async boundaries**
 ```rust
 // ❌ Bad: Unwrap in async context
 async fn bad_read() {
@@ -958,7 +958,7 @@ async fn good_read() -> Result<String> {
 }
 ```
 
-### 2. **Pitfall: Blocking operations in async functions**
+#### 2. **Pitfall: Blocking operations in async functions**
 ```rust
 // ❌ Bad: Blocking file I/O
 async fn bad() {
@@ -972,7 +972,9 @@ async fn good() -> Result<String> {
 }
 ```
 
-### 3. **Pitfall: Not providing context with anyhow**
+
+
+#### 3. **Pitfall: Not providing context with anyhow**
 ```rust
 // ❌ Bad: Generic error messages
 let config: AppConfig = serde_json::from_str(&contents)?;
@@ -982,7 +984,8 @@ let config: AppConfig = serde_json::from_str(&contents)
     .context(format!("Failed to parse config from {}", path.display()))?;
 ```
 
-### 4. **Pitfall: Using unwrap() in production code**
+
+#### 4. **Pitfall: Using unwrap() in production code**
 ```rust
 // ❌ Bad: Can panic
 let config = serde_json::from_str(&contents).unwrap();
@@ -992,7 +995,7 @@ let config = serde_json::from_str(&contents)
     .map_err(|e| ConfigError::InvalidJson { source: e })?;
 ```
 
-### 5. **Pitfall: Not validating business rules**
+#### 5. **Pitfall: Not validating business rules**
 ```rust
 // ❌ Bad: Only type validation
 #[derive(Deserialize)]
@@ -1013,7 +1016,7 @@ impl Config {
 }
 ```
 
-### 6. **Pitfall: Not using tokio::select! for cancellation**
+#### 6. **Pitfall: Not using tokio::select! for cancellation**
 ```rust
 // ❌ Bad: No graceful shutdown
 #[tokio::main]
@@ -1033,7 +1036,7 @@ async fn main() {
 }
 ```
 
-### 7. **Pitfall: Forgetting #[serde(default)] for optional fields**
+#### 7. **Pitfall: Forgetting #[serde(default)] for optional fields**
 ```rust
 // ❌ Bad: Missing fields cause deserialization errors
 #[derive(Deserialize)]
@@ -1051,7 +1054,7 @@ struct Config {
 
 ---
 
-## Production Improvements
+### Production Improvements
 
 For a production system, consider adding:
 
@@ -1066,7 +1069,7 @@ For a production system, consider adding:
 
 ---
 
-## Summary
+### Summary
 
 You've built a production-quality config watcher demonstrating:
 
